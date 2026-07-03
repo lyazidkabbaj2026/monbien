@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+/*
+ * Les couleurs de marque sont injectées depuis site.config.ts (voir layout.tsx,
+ * attribut style de <html>). Les valeurs ci-dessous servent de repli.
+ */
+:root {
+  --brand-primary: #0f4c5c;
+  --brand-accent: #e36414;
+  --brand-ink: #14181b;
+  --brand-sand: #f6f4ef;
+
+  --brand-primary-deep: color-mix(in oklab, var(--brand-primary) 82%, black);
+  --brand-primary-soft: color-mix(in oklab, var(--brand-primary) 8%, white);
+  --brand-accent-deep: color-mix(in oklab, var(--brand-accent) 85%, black);
+  --brand-sand-deep: color-mix(in oklab, var(--brand-sand) 92%, var(--brand-ink));
+  --brand-line: color-mix(in oklab, var(--brand-ink) 12%, transparent);
+}
+
+@theme inline {
+  --color-primary: var(--brand-primary);
+  --color-primary-deep: var(--brand-primary-deep);
+  --color-primary-soft: var(--brand-primary-soft);
+  --color-accent: var(--brand-accent);
+  --color-accent-deep: var(--brand-accent-deep);
+  --color-ink: var(--brand-ink);
+  --color-sand: var(--brand-sand);
+  --color-sand-deep: var(--brand-sand-deep);
+  --color-line: var(--brand-line);
+  --color-whatsapp: #25d366;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-grotesk), var(--font-inter), ui-sans-serif, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--brand-sand);
+  color: var(--brand-ink);
+  font-feature-settings: "liga" 1, "kern" 1;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--brand-accent) 30%, white);
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .btn,
+  .btn-accent,
+  .btn-primary,
+  .btn-outline,
+  .btn-whatsapp {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-[15px] font-semibold transition-all duration-200 select-none active:scale-[0.98];
+  }
+  .btn-accent {
+    @apply bg-accent text-white shadow-[0_8px_24px_-8px_var(--brand-accent)] hover:bg-accent-deep hover:shadow-[0_10px_28px_-6px_var(--brand-accent)];
+  }
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-deep;
+  }
+  .btn-outline {
+    @apply border border-line bg-white/60 text-ink backdrop-blur hover:border-primary hover:text-primary;
+  }
+  .btn-whatsapp {
+    @apply bg-whatsapp text-white hover:brightness-95;
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-white shadow-[0_1px_2px_rgba(20,24,27,0.04)];
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-line bg-white px-4 py-3.5 text-[15px] text-ink outline-none transition placeholder:text-ink/35 focus:border-primary focus:ring-2 focus:ring-primary/15;
+  }
+
+  .label {
+    @apply mb-1.5 block text-[13px] font-semibold tracking-wide text-ink/70;
+  }
+
+  .kicker {
+    @apply mb-3 inline-flex items-center gap-2 text-[13px] font-bold tracking-[0.14em] text-accent uppercase;
+  }
+
+  .h-display {
+    @apply font-display text-3xl leading-[1.08] font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl;
+  }
+
+  .h-section {
+    @apply font-display text-2xl leading-tight font-bold tracking-tight text-ink sm:text-3xl;
+  }
+
+  .prose-blog {
+    @apply text-[16.5px] leading-relaxed text-ink/85;
+  }
+  .prose-blog h2 {
+    @apply font-display mt-10 mb-4 text-2xl font-bold tracking-tight text-ink;
+  }
+  .prose-blog h3 {
+    @apply font-display mt-8 mb-3 text-xl font-bold text-ink;
+  }
+  .prose-blog p {
+    @apply my-4;
+  }
+  .prose-blog ul,
+  .prose-blog ol {
+    @apply my-4 space-y-2 pl-6;
+  }
+  .prose-blog ul {
+    @apply list-disc;
+  }
+  .prose-blog ol {
+    @apply list-decimal;
+  }
+  .prose-blog a {
+    @apply font-semibold text-primary underline decoration-accent/40 underline-offset-4 hover:decoration-accent;
+  }
+  .prose-blog strong {
+    @apply font-bold text-ink;
+  }
+  .prose-blog blockquote {
+    @apply my-6 border-l-4 border-accent/60 pl-4 text-ink/70 italic;
+  }
+  .prose-blog img {
+    @apply my-6 rounded-2xl;
+  }
+}
+
+/* Apparition au scroll — inerte sans JavaScript et si mouvement réduit. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Surfaces décoratives en dégradés (aucune image = 0 coût LCP) */
+.hero-surface {
+  background:
+    radial-gradient(
+      1100px 500px at 85% -10%,
+      color-mix(in oklab, var(--brand-primary) 14%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 420px at -10% 110%,
+      color-mix(in oklab, var(--brand-accent) 10%, transparent),
+      transparent 55%
+    ),
+    var(--brand-sand);
+}
+
+.dark-surface {
+  background:
+    radial-gradient(
+      900px 480px at 90% -20%,
+      color-mix(in oklab, var(--brand-accent) 22%, transparent),
+      transparent 55%
+    ),
+    linear-gradient(160deg, var(--brand-primary-deep), var(--brand-primary));
+}
