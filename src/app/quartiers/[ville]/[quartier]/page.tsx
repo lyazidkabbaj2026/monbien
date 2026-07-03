@@ -12,7 +12,7 @@ import {
 } from "@/lib/data";
 import { comboSlug } from "@/lib/programmatic";
 import { formatNumber } from "@/lib/format";
-import { pageMetadata } from "@/lib/seo";
+import { ogCard, pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { FaqBlock, type Faq } from "@/components/FaqBlock";
 import { LeadForm } from "@/components/LeadForm";
@@ -41,6 +41,11 @@ export async function generateMetadata({
     title: `Immobilier ${hood.name} (${city.name}) — prix au m², vente & location`,
     description: `Acheter, vendre ou louer à ${hood.name}, ${city.name} : prix au m² actualisés, annonces du quartier et conseils d'un expert local. Estimation gratuite.`,
     path: `/quartiers/${city.slug}/${hood.slug}`,
+    image: ogCard(
+      `Immobilier à ${hood.name}`,
+      `Prix au m², annonces et conseils d'expert local à ${hood.name}, ${city.name}.`,
+      city.name
+    ),
   });
 }
 

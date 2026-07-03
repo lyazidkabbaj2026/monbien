@@ -1,5 +1,5 @@
 import { site } from "../../../site.config";
-import { pageMetadata } from "@/lib/seo";
+import { ogCard, pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CreditSimulator } from "@/components/CreditSimulator";
 import { FaqBlock } from "@/components/FaqBlock";
@@ -10,6 +10,11 @@ export const metadata = pageMetadata({
   description:
     "Calculez gratuitement votre mensualité de crédit immobilier au Maroc : montant emprunté, taux, durée, coût des intérêts et tableau d'amortissement détaillé.",
   path: "/simulateur-credit",
+  image: ogCard(
+    "Simulateur de crédit immobilier",
+    "Mensualité, coût total et tableau d'amortissement — calibrez votre financement.",
+    "Gratuit"
+  ),
 });
 
 const FAQS = [

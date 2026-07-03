@@ -3,7 +3,7 @@ import Link from "next/link";
 import { site } from "../../../site.config";
 import { getBlogCategories, getPublishedPosts } from "@/lib/data";
 import { formatDate, readingTimeMinutes } from "@/lib/format";
-import { pageMetadata } from "@/lib/seo";
+import { ogCard, pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const revalidate = 900;
@@ -12,6 +12,11 @@ export const metadata = pageMetadata({
   title: `Blog immobilier — conseils, prix et actualités du marché à ${site.defaultCity}`,
   description: `Guides pratiques, analyses de prix et conseils d'expert pour acheter, vendre ou louer à ${site.defaultCity} et au Maroc.`,
   path: "/blog",
+  image: ogCard(
+    "Le blog de l'immobilier marocain",
+    "Prix, quartiers, financement, démarches : décidez avec des données.",
+    "Blog"
+  ),
 });
 
 export default async function BlogIndexPage({

@@ -26,6 +26,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/simulateur-credit"), lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/prix-immobilier"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/blog"), lastModified: now, changeFrequency: "daily", priority: 0.7 },
+    { url: absoluteUrl("/mentions-legales"), lastModified: now, changeFrequency: "yearly", priority: 0.2 },
+    { url: absoluteUrl("/politique-de-confidentialite"), lastModified: now, changeFrequency: "yearly", priority: 0.2 },
   ];
 
   for (const slug of listingSlugs) {

@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { site } from "../../../../site.config";
 import { getCities, getCityBySlug, getCityPriceData } from "@/lib/data";
 import { formatNumber } from "@/lib/format";
-import { pageMetadata } from "@/lib/seo";
+import { ogCard, pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CityPriceBlock, buildPricePoints } from "@/components/CityPriceBlock";
 import { FaqBlock } from "@/components/FaqBlock";
@@ -31,6 +31,11 @@ export async function generateMetadata({
     title: `Prix de l'immobilier à ${city.name} 2026 — prix au m² par quartier`,
     description: `Quel est le prix au m² à ${city.name} ? Carte interactive et tableau des prix de vente et de location, quartier par quartier. Données actualisées.`,
     path: `/prix-immobilier/${city.slug}`,
+    image: ogCard(
+      `Prix de l'immobilier à ${city.name}`,
+      "Prix au m² par quartier, à la vente et à la location — données actualisées.",
+      city.name
+    ),
   });
 }
 

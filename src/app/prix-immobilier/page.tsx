@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, MapPinned } from "lucide-react";
 import { site } from "../../../site.config";
 import { getCities, getCityBySlug, getCityPriceData } from "@/lib/data";
-import { pageMetadata } from "@/lib/seo";
+import { ogCard, pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CityPriceBlock, buildPricePoints } from "@/components/CityPriceBlock";
 import { LeadForm } from "@/components/LeadForm";
@@ -15,6 +15,11 @@ export const metadata = pageMetadata({
   title: `Prix de l'immobilier au m² à ${site.defaultCity} et au Maroc — carte interactive`,
   description: `Carte interactive des prix immobiliers au m², quartier par quartier : vente et location à ${site.defaultCity}, Casablanca, Marrakech, Tanger. Données mises à jour en continu.`,
   path: "/prix-immobilier",
+  image: ogCard(
+    "Prix de l'immobilier au m²",
+    `Carte interactive des prix par quartier à ${site.defaultCity} et dans tout le Maroc.`,
+    "Carte des prix"
+  ),
 });
 
 export default async function PriceIndexPage() {

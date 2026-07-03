@@ -78,7 +78,13 @@ export function Footer() {
             © {new Date().getFullYear()} {site.brandName} — Immobilier à{" "}
             {site.defaultCity}, Maroc.
           </p>
-          <p>
+          <p className="flex flex-wrap gap-x-4 gap-y-1">
+            <Link href="/mentions-legales" className="hover:text-white">
+              Mentions légales
+            </Link>
+            <Link href="/politique-de-confidentialite" className="hover:text-white">
+              Confidentialité
+            </Link>
             <a href={`mailto:${site.contactEmail}`} className="hover:text-white">
               {site.contactEmail}
             </a>

@@ -9,7 +9,7 @@ import {
   type ListingFilters,
 } from "@/lib/data";
 import type { Transaction } from "@/lib/types";
-import { pageMetadata } from "@/lib/seo";
+import { ogCard, pageMetadata } from "@/lib/seo";
 import { ListingCard } from "@/components/ListingCard";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
@@ -17,6 +17,10 @@ export const metadata = pageMetadata({
   title: `Annonces immobilières à ${site.defaultCity} et au Maroc — vente & location`,
   description: `Appartements, villas, maisons à vendre ou à louer à ${site.defaultCity} et dans tout le Maroc. Annonces vérifiées, photos réelles, visite rapide.`,
   path: "/annonces",
+  image: ogCard(
+    "Annonces immobilières vérifiées",
+    `Appartements, villas et maisons à vendre ou à louer à ${site.defaultCity} et au Maroc.`
+  ),
 });
 
 interface SearchParams {

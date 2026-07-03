@@ -8,6 +8,7 @@ import { siteUrl, localBusinessJsonLd } from "@/lib/seo";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppSticky } from "@/components/WhatsAppSticky";
+import { ValuationNudge } from "@/components/ValuationNudge";
 import { JsonLd } from "@/components/JsonLd";
 
 const inter = Inter({
@@ -58,6 +59,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <WhatsAppSticky />
+        <ValuationNudge />
         {gaId && (
           <>
             <Script

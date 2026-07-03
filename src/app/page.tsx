@@ -12,7 +12,7 @@ import {
 import { site } from "../../site.config";
 import { getFeaturedListings, getPublishedPosts } from "@/lib/data";
 import { formatDate, readingTimeMinutes } from "@/lib/format";
-import { pageMetadata } from "@/lib/seo";
+import { ogCard, pageMetadata } from "@/lib/seo";
 import { ListingCard } from "@/components/ListingCard";
 import { Reveal } from "@/components/Reveal";
 import { AgentCard } from "@/components/AgentCard";
@@ -23,6 +23,7 @@ export const metadata = pageMetadata({
   title: `${site.brandName} — ${site.tagline}`,
   description: `Estimation gratuite de votre bien à ${site.defaultCity}, annonces vérifiées, simulateur de crédit et carte des prix au m². ${site.agent.responseTime}.`,
   path: "/",
+  image: ogCard(site.tagline, `Estimation gratuite, annonces vérifiées et prix au m² par quartier.`),
 });
 
 const TOOLS = [

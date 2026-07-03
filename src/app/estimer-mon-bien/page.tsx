@@ -2,7 +2,7 @@ import { BadgeCheck, Clock3, Database, HandCoins } from "lucide-react";
 import { site } from "../../../site.config";
 import { getCities, getNeighborhoods } from "@/lib/data";
 import type { Neighborhood } from "@/lib/types";
-import { pageMetadata } from "@/lib/seo";
+import { ogCard, pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ValuationWizard } from "@/components/ValuationWizard";
 import { FaqBlock } from "@/components/FaqBlock";
@@ -14,6 +14,11 @@ export const metadata = pageMetadata({
   title: `Estimation immobilière gratuite à ${site.defaultCity} — résultat en 2 minutes`,
   description: `Combien vaut votre appartement, villa ou maison à ${site.defaultCity} ? Estimation gratuite et immédiate basée sur les prix réels au m² de votre quartier.`,
   path: "/estimer-mon-bien",
+  image: ogCard(
+    `Combien vaut votre bien à ${site.defaultCity} ?`,
+    "Estimation gratuite en 2 minutes, basée sur les prix réels de votre quartier.",
+    "Gratuit"
+  ),
 });
 
 const REASSURANCE = [

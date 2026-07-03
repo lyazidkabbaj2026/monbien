@@ -12,7 +12,7 @@ import {
 } from "@/lib/data";
 import { allCombos, comboSlug, parseCombo } from "@/lib/programmatic";
 import { formatNumber, formatPricePerM2 } from "@/lib/format";
-import { pageMetadata } from "@/lib/seo";
+import { ogCard, pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { FaqBlock, type Faq } from "@/components/FaqBlock";
 import { LeadForm } from "@/components/LeadForm";
@@ -42,6 +42,11 @@ export async function generateMetadata({
     title: `${parts.typePlural} ${parts.transactionVerb} à ${city.name} — annonces & prix 2026`,
     description: `${parts.typePlural} ${parts.transactionVerb} à ${city.name} : annonces vérifiées, prix au m² par quartier et accompagnement local. ${site.agent.responseTime} sur WhatsApp.`,
     path: `/immobilier/${city.slug}/${combo}`,
+    image: ogCard(
+      `${parts.typePlural} ${parts.transactionVerb} à ${city.name}`,
+      `Annonces vérifiées, prix au m² par quartier et accompagnement local.`,
+      city.name
+    ),
   });
 }
 

@@ -4,7 +4,6 @@ import { supabaseServer } from "@/lib/supabase/server";
 import type { Lead, LeadSource, LeadStatus, Valuation } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
 import { LeadStatusSelect } from "@/components/admin/LeadStatusSelect";
-import { LogoutButton } from "@/components/admin/LogoutButton";
 import { pageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -100,7 +99,6 @@ export default async function AdminPage({
             estimations
           </p>
         </div>
-        <LogoutButton />
       </div>
 
       {/* Filtres */}

@@ -18,6 +18,14 @@ export function absoluteUrl(path: string): string {
   return `${siteUrl()}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
+/** URL d'une carte OG générée (/api/og) pour les pages sans photo. */
+export function ogCard(title: string, subtitle?: string, badge?: string): string {
+  const params = new URLSearchParams({ title });
+  if (subtitle) params.set("subtitle", subtitle);
+  if (badge) params.set("badge", badge);
+  return `/api/og?${params.toString()}`;
+}
+
 /** Metadata de base : title/description/canonical/OG/Twitter en une ligne. */
 export function pageMetadata(opts: {
   title: string;
