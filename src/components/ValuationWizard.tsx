@@ -16,6 +16,7 @@ import {
   TreePine,
 } from "lucide-react";
 import { site } from "../../site.config";
+import { track } from "@/lib/gtag";
 import type { City, Neighborhood } from "@/lib/types";
 import { formatPrice, formatNumber } from "@/lib/format";
 import { WhatsAppIcon } from "./WhatsAppIcon";
@@ -106,6 +107,7 @@ export function ValuationWizard({
       const json = await res.json();
       if (!res.ok) throw new Error(json.error ?? "erreur");
       setResult(json as Result);
+      track("generate_lead", { source: "valuation", property_type: propertyType });
     } catch (err) {
       setError(
         err instanceof Error && err.message.includes("zone")

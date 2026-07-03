@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { track } from "@/lib/gtag";
 import { waLink, waMessages } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { site } from "../../site.config";
@@ -25,6 +26,7 @@ export function WhatsAppSticky() {
       href={waLink(messageFor(pathname))}
       target="_blank"
       rel="noopener"
+      onClick={() => track("whatsapp_click", { placement: "sticky", path: pathname })}
       aria-label="Nous écrire sur WhatsApp"
       className="fixed right-4 bottom-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-[0_10px_30px_-6px_rgba(37,211,102,0.65)] transition hover:scale-105 active:scale-95 sm:right-6 sm:bottom-6"
     >

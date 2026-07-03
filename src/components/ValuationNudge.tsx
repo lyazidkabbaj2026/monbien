@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Home, X } from "lucide-react";
+import { track } from "@/lib/gtag";
 import { site } from "../../site.config";
 
 const STORAGE_KEY = "mb-nudge-snooze-until";
@@ -61,6 +62,7 @@ export function ValuationNudge() {
       if (shown || Date.now() - armedAt.current < MIN_DWELL_MS) return;
       shown = true;
       setVisible(true);
+      track("nudge_view", { path: pathname });
       cleanup();
     };
 
@@ -117,7 +119,10 @@ export function ValuationNudge() {
           </p>
           <Link
             href="/estimer-mon-bien"
-            onClick={dismiss}
+            onClick={() => {
+              track("nudge_click", { path: pathname });
+              dismiss();
+            }}
             className="btn-accent mt-3 !px-4 !py-2 text-[13px]"
           >
             Estimer gratuitement

@@ -125,6 +125,16 @@ export default async function NeighborhoodPage({
 
       <div className="wrap grid gap-10 py-10 sm:py-14 lg:grid-cols-[1.5fr_1fr]">
         <div className="space-y-12">
+          {/* Présentation éditoriale */}
+          {hood.description && (
+            <section>
+              <h2 className="h-section mb-4">Vivre à {hood.name}</h2>
+              <p className="max-w-2xl text-[15.5px] leading-relaxed text-ink/75">
+                {hood.description}
+              </p>
+            </section>
+          )}
+
           {/* Prix du quartier */}
           {priceRows.length > 0 && (
             <section>

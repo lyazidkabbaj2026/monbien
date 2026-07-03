@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {
@@ -26,9 +25,11 @@ import { waLink, waMessages } from "@/lib/whatsapp";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { LeadForm } from "@/components/LeadForm";
+import { ListingGallery } from "@/components/ListingGallery";
 import { AgentCard } from "@/components/AgentCard";
 import { ListingCard } from "@/components/ListingCard";
 import { ListingMap } from "@/components/map/ListingMap";
+import { WaButton } from "@/components/WaButton";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 
 export const revalidate = 1800;
@@ -89,7 +90,6 @@ export default async function ListingPage({
   const location = [listing.neighborhood?.name, listing.city?.name]
     .filter(Boolean)
     .join(", ");
-  const [mainImage, ...thumbs] = listing.images ?? [];
 
   const specs = [
     listing.area_m2 != null && {
@@ -126,39 +126,12 @@ export default async function ListingPage({
       />
 
       {/* Galerie */}
-      <div className="mt-5 grid gap-3 lg:grid-cols-[2fr_1fr]">
-        <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-sand-deep">
-          {mainImage && (
-            <Image
-              src={mainImage.url}
-              alt={mainImage.alt ?? listing.title}
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 66vw"
-              className="object-cover"
-            />
-          )}
-          <span className="absolute top-4 left-4 rounded-full bg-ink/75 px-3.5 py-1.5 text-[13px] font-semibold text-white backdrop-blur">
-            {listing.transaction === "vente" ? "À vendre" : "À louer"} · Réf.{" "}
-            {listing.ref}
-          </span>
-        </div>
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-1">
-          {thumbs.slice(0, 2).map((img) => (
-            <div
-              key={img.url}
-              className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-sand-deep lg:aspect-auto lg:h-full"
-            >
-              <Image
-                src={img.url}
-                alt={img.alt ?? listing.title}
-                fill
-                sizes="(max-width: 1024px) 50vw, 33vw"
-                className="object-cover"
-              />
-            </div>
-          ))}
-        </div>
+      <div className="mt-5">
+        <ListingGallery
+          images={listing.images ?? []}
+          title={listing.title}
+          badge={`${listing.transaction === "vente" ? "À vendre" : "À louer"} · Réf. ${listing.ref}`}
+        />
       </div>
 
       <div className="mt-8 grid gap-10 lg:grid-cols-[1.6fr_1fr]">
@@ -283,15 +256,13 @@ export default async function ListingPage({
               ou
               <span className="h-px flex-1 bg-line" />
             </div>
-            <a
+            <WaButton
               href={waLink(waMessages.listing(listing.title, listing.ref))}
-              target="_blank"
-              rel="noopener"
-              className="btn-whatsapp w-full"
+              placement="listing_sidebar"
             >
               <WhatsAppIcon className="h-5 w-5" />
               WhatsApp direct
-            </a>
+            </WaButton>
             <div className="mt-5">
               <AgentCard compact />
             </div>

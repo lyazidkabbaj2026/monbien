@@ -2,7 +2,16 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { supabaseServer } from "@/lib/supabase/server";
 
-/** Revalidation ISR après création/édition d'annonce depuis /admin. */
+// Chemins revalidables depuis l'admin (préfixes autorisés).
+const ALLOWED_PREFIXES = [
+  "/annonces",
+  "/prix-immobilier",
+  "/quartiers",
+  "/immobilier",
+];
+const SAFE_PATH = /^\/[a-z0-9/-]*$/;
+
+/** Revalidation ISR après une écriture depuis /admin. */
 export async function POST(request: Request) {
   const supabase = await supabaseServer();
   const {
@@ -12,22 +21,36 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
-  let body: { slugs?: unknown };
+  let body: { slugs?: unknown; paths?: unknown };
   try {
     body = await request.json();
   } catch {
     body = {};
   }
 
-  const paths = ["/", "/annonces", "/sitemap.xml"];
+  const paths = new Set<string>(["/", "/annonces", "/sitemap.xml"]);
+
+  // Rétro-compatibilité : slugs d'annonces
   if (Array.isArray(body.slugs)) {
     for (const slug of body.slugs) {
       if (typeof slug === "string" && /^[a-z0-9-]+$/.test(slug)) {
-        paths.push(`/annonces/${slug}`);
+        paths.add(`/annonces/${slug}`);
       }
     }
   }
-  paths.forEach((path) => revalidatePath(path));
+  // Chemins explicites (éditeur de prix, quartiers…)
+  if (Array.isArray(body.paths)) {
+    for (const path of body.paths) {
+      if (
+        typeof path === "string" &&
+        SAFE_PATH.test(path) &&
+        ALLOWED_PREFIXES.some((prefix) => path === prefix || path.startsWith(`${prefix}/`))
+      ) {
+        paths.add(path);
+      }
+    }
+  }
 
-  return NextResponse.json({ ok: true, revalidated: paths });
+  paths.forEach((path) => revalidatePath(path));
+  return NextResponse.json({ ok: true, revalidated: [...paths] });
 }

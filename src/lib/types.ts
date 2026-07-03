@@ -28,6 +28,7 @@ export interface Neighborhood {
   slug: string;
   lat: number | null;
   lng: number | null;
+  description?: string | null;
 }
 
 export interface PriceData {

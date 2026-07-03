@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { clientIp, rateLimit } from "@/lib/rateLimit";
 import { insertLead, type LeadInput } from "@/lib/leads";
 import { waLink, waMessages } from "@/lib/whatsapp";
 import { notifyOwner } from "@/lib/leads";
@@ -14,6 +15,10 @@ const VALID_SOURCES: LeadSource[] = [
 ];
 
 export async function POST(request: Request) {
+  if (!rateLimit(`leads:${clientIp(request)}`)) {
+    return NextResponse.json({ error: "too many requests" }, { status: 429 });
+  }
+
   let body: Record<string, unknown>;
   try {
     body = await request.json();

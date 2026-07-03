@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
+import { track } from "@/lib/gtag";
 import type { LeadSource } from "@/lib/types";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 import { site } from "../../site.config";
@@ -83,6 +84,7 @@ export function LeadForm({
       const json = (await res.json()) as { leadId: string; whatsappUrl: string };
       setWhatsappUrl(json.whatsappUrl);
       setStatus("success");
+      track("generate_lead", { source, source_ref: sourceRef });
       onSuccess?.(json);
     } catch {
       setStatus("error");

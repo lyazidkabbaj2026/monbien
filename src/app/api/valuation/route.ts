@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { clientIp, rateLimit } from "@/lib/rateLimit";
 import { supabasePublic } from "@/lib/supabase/public";
 import { computeEstimate, type PropertyCondition } from "@/lib/valuation";
 import { notifyOwner } from "@/lib/leads";
@@ -8,6 +9,10 @@ import { formatPrice } from "@/lib/format";
 const CONDITIONS: PropertyCondition[] = ["neuf", "bon", "a_renover"];
 
 export async function POST(request: Request) {
+  if (!rateLimit(`valuation:${clientIp(request)}`)) {
+    return NextResponse.json({ error: "too many requests" }, { status: 429 });
+  }
+
   let body: Record<string, unknown>;
   try {
     body = await request.json();
