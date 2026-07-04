@@ -10,7 +10,13 @@ import {
   Star,
 } from "lucide-react";
 import { site } from "../../site.config";
-import { getFeaturedListings, getPublishedPosts } from "@/lib/data";
+import {
+  getCities,
+  getCityBySlug,
+  getFeaturedListings,
+  getNeighborhoods,
+  getPublishedPosts,
+} from "@/lib/data";
 import { formatDate, readingTimeMinutes } from "@/lib/format";
 import { ogCard, pageMetadata } from "@/lib/seo";
 import { ListingCard } from "@/components/ListingCard";
@@ -51,11 +57,14 @@ const TOOLS = [
 ];
 
 export default async function HomePage() {
-  const [featured, posts] = await Promise.all([
+  const [featured, posts, cities, rabat] = await Promise.all([
     getFeaturedListings(3),
     getPublishedPosts(),
+    getCities(),
+    getCityBySlug(site.defaultCitySlug),
   ]);
   const latestPosts = posts.slice(0, 3);
+  const rabatHoods = rabat ? await getNeighborhoods(rabat.id) : [];
 
   return (
     <>
@@ -300,6 +309,46 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      {/* ------------------------------------------------- Maillage explorer */}
+      <section className="wrap pt-4 pb-2" aria-label="Explorer le marché">
+        <div className="grid gap-10 border-t border-line pt-12 md:grid-cols-2">
+          <div>
+            <h2 className="font-display text-lg font-bold text-ink">
+              L&apos;immobilier ville par ville
+            </h2>
+            <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2.5">
+              {cities.map((city) => (
+                <li key={city.slug}>
+                  <Link
+                    href={`/prix-immobilier/${city.slug}`}
+                    className="text-[14px] text-ink/65 underline decoration-line underline-offset-4 transition hover:text-primary hover:decoration-accent"
+                  >
+                    Prix immobilier {city.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h2 className="font-display text-lg font-bold text-ink">
+              Les quartiers de {site.defaultCity}
+            </h2>
+            <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2.5">
+              {rabatHoods.map((hood) => (
+                <li key={hood.slug}>
+                  <Link
+                    href={`/quartiers/${site.defaultCitySlug}/${hood.slug}`}
+                    className="text-[14px] text-ink/65 underline decoration-line underline-offset-4 transition hover:text-primary hover:decoration-accent"
+                  >
+                    Immobilier {hood.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
 
       {/* ---------------------------------------------------------- CTA final */}
       <section className="wrap py-16 sm:py-20">

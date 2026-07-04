@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
 import { MobileNav } from "./MobileNav";
+import { NavLinks } from "./NavLinks";
 
+// L'estimation est la CTA principale : elle n'apparaît pas en double dans le menu.
 export const NAV_LINKS = [
   { href: "/annonces", label: "Annonces" },
-  { href: "/estimer-mon-bien", label: "Estimer mon bien" },
-  { href: "/simulateur-credit", label: "Simulateur de crédit" },
   { href: "/prix-immobilier", label: "Prix au m²" },
+  { href: "/simulateur-credit", label: "Simulateur de crédit" },
   { href: "/blog", label: "Blog" },
 ];
 
@@ -16,15 +17,7 @@ export function Header() {
       <div className="wrap flex h-16 items-center justify-between gap-4">
         <Logo />
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Navigation principale">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-[14.5px] font-medium text-ink/75 transition hover:text-primary"
-            >
-              {link.label}
-            </Link>
-          ))}
+          <NavLinks links={NAV_LINKS} />
         </nav>
         <div className="flex items-center gap-3">
           <Link

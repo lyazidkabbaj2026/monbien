@@ -66,16 +66,17 @@ export async function POST(request: Request) {
   }
 
   // Publication instantanée sans redéploiement
-  revalidatePath("/blog");
-  revalidatePath(`/blog/${slug}`);
-  revalidatePath("/");
-  revalidatePath("/sitemap.xml");
+  const revalidated = ["/blog", `/blog/${slug}`, "/", "/sitemap.xml"];
+  if (typeof body.category === "string" && body.category.trim()) {
+    revalidated.push(`/blog/categorie/${slugify(body.category)}`);
+  }
+  revalidated.forEach((path) => revalidatePath(path));
 
   return NextResponse.json({
     ok: true,
     id: data,
     slug,
     url: `/blog/${slug}`,
-    revalidated: ["/blog", `/blog/${slug}`, "/", "/sitemap.xml"],
+    revalidated,
   });
 }

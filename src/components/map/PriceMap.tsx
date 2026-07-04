@@ -35,7 +35,8 @@ export function PriceMap({
 }) {
   return (
     <LazyVisible
-      className="h-[420px] overflow-hidden rounded-2xl sm:h-[480px]"
+      // isolate : les panneaux Leaflet (z-index 400+) restent confinés ici
+      className="relative isolate z-0 h-[420px] overflow-hidden rounded-2xl sm:h-[480px]"
       placeholder={<MapSkeleton />}
     >
       <PriceMapInner center={center} points={points} />

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, Images, X } from "lucide-react";
 import type { ListingImage } from "@/lib/types";
+import { IMG_BLUR } from "@/lib/image";
 
 /**
  * Galerie d'annonce : grille principale + visionneuse plein écran
@@ -72,6 +73,8 @@ export function ListingGallery({
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 66vw"
+            placeholder="blur"
+            blurDataURL={IMG_BLUR}
             className="object-cover transition duration-300 group-hover:scale-[1.02]"
           />
           {badge && (

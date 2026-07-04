@@ -3,6 +3,7 @@ import Link from "next/link";
 import { BedDouble, Bath, Maximize } from "lucide-react";
 import type { Listing } from "@/lib/types";
 import { formatListingPrice } from "@/lib/format";
+import { IMG_BLUR } from "@/lib/image";
 
 export function ListingCard({
   listing,
@@ -27,6 +28,8 @@ export function ListingCard({
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               priority={priority}
+              placeholder="blur"
+              blurDataURL={IMG_BLUR}
               className="object-cover transition duration-500 group-hover:scale-[1.04]"
             />
           ) : (

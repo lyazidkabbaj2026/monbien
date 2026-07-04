@@ -2,9 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { site } from "../../../site.config";
 import { getBlogCategories, getPublishedPosts } from "@/lib/data";
-import { formatDate, readingTimeMinutes } from "@/lib/format";
+import { formatDate, readingTimeMinutes, slugify } from "@/lib/format";
+import { IMG_BLUR } from "@/lib/image";
 import { ogCard, pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { BlogPostCard } from "@/components/BlogPostCard";
 
 export const revalidate = 900;
 
@@ -19,14 +21,9 @@ export const metadata = pageMetadata({
   ),
 });
 
-export default async function BlogIndexPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ categorie?: string }>;
-}) {
-  const { categorie } = await searchParams;
+export default async function BlogIndexPage() {
   const [posts, categories] = await Promise.all([
-    getPublishedPosts(categorie || undefined),
+    getPublishedPosts(),
     getBlogCategories(),
   ]);
   const [featured, ...rest] = posts;
@@ -41,35 +38,26 @@ export default async function BlogIndexPage({
       />
       <div className="mt-4 max-w-2xl">
         <p className="kicker">Guides &amp; analyses</p>
-        <h1 className="h-display !text-3xl sm:!text-4xl">Le blog de l&apos;immobilier marocain</h1>
+        <h1 className="h-display !text-3xl sm:!text-4xl">
+          Le blog de l&apos;immobilier marocain
+        </h1>
         <p className="mt-3 text-[15.5px] text-ink/65">
           Prix, quartiers, financement, démarches : tout pour décider avec des
           données, pas au feeling.
         </p>
       </div>
 
-      {/* Filtres par catégorie */}
+      {/* Catégories (pages statiques dédiées) */}
       {categories.length > 0 && (
         <nav aria-label="Catégories" className="mt-7 flex flex-wrap gap-2">
-          <Link
-            href="/blog"
-            className={`rounded-full px-4 py-2 text-[13.5px] font-semibold transition ${
-              !categorie
-                ? "bg-primary text-white"
-                : "border border-line bg-white text-ink/70 hover:border-primary hover:text-primary"
-            }`}
-          >
+          <span className="rounded-full bg-primary px-4 py-2 text-[13.5px] font-semibold text-white">
             Tous
-          </Link>
+          </span>
           {categories.map((cat) => (
             <Link
               key={cat}
-              href={`/blog?categorie=${encodeURIComponent(cat)}`}
-              className={`rounded-full px-4 py-2 text-[13.5px] font-semibold transition ${
-                categorie === cat
-                  ? "bg-primary text-white"
-                  : "border border-line bg-white text-ink/70 hover:border-primary hover:text-primary"
-              }`}
+              href={`/blog/categorie/${slugify(cat)}`}
+              className="rounded-full border border-line bg-white px-4 py-2 text-[13.5px] font-semibold text-ink/70 transition hover:border-primary hover:text-primary"
             >
               {cat}
             </Link>
@@ -79,7 +67,7 @@ export default async function BlogIndexPage({
 
       {posts.length === 0 && (
         <p className="card mt-8 p-8 text-center text-[15px] text-ink/60">
-          Aucun article dans cette catégorie pour le moment.
+          Les premiers articles arrivent très vite.
         </p>
       )}
 
@@ -97,6 +85,8 @@ export default async function BlogIndexPage({
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 60vw"
+                placeholder="blur"
+                blurDataURL={IMG_BLUR}
                 className="object-cover transition duration-500 group-hover:scale-[1.03]"
               />
             </div>
@@ -125,31 +115,7 @@ export default async function BlogIndexPage({
       {rest.length > 0 && (
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {rest.map((post) => (
-            <Link key={post.id} href={`/blog/${post.slug}`} className="card group block overflow-hidden">
-              {post.hero_image && (
-                <div className="relative aspect-[16/9] overflow-hidden bg-sand-deep">
-                  <Image
-                    src={post.hero_image}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition duration-500 group-hover:scale-[1.04]"
-                  />
-                </div>
-              )}
-              <div className="p-5">
-                <p className="text-[12px] font-bold tracking-wide text-accent uppercase">
-                  {post.category ?? "Conseils"}
-                </p>
-                <h2 className="mt-2 line-clamp-2 text-[16px] leading-snug font-bold text-ink group-hover:text-primary">
-                  {post.title}
-                </h2>
-                <p className="mt-3 text-[12.5px] text-ink/50">
-                  {post.published_at ? formatDate(post.published_at) : ""} ·{" "}
-                  {readingTimeMinutes(post.body_md)} min
-                </p>
-              </div>
-            </Link>
+            <BlogPostCard key={post.id} post={post} />
           ))}
         </div>
       )}

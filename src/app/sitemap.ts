@@ -2,20 +2,23 @@ import type { MetadataRoute } from "next";
 import {
   getActiveListingSlugs,
   getAllNeighborhoodsWithCity,
+  getBlogCategories,
   getCities,
   getPublishedPosts,
 } from "@/lib/data";
 import { allCombos } from "@/lib/programmatic";
 import { absoluteUrl } from "@/lib/seo";
+import { slugify } from "@/lib/format";
 
 export const revalidate = 21600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [cities, hoods, listingSlugs, posts] = await Promise.all([
+  const [cities, hoods, listingSlugs, posts, categories] = await Promise.all([
     getCities(),
     getAllNeighborhoodsWithCity(),
     getActiveListingSlugs(),
     getPublishedPosts(),
+    getBlogCategories(),
   ]);
 
   const now = new Date();
@@ -62,6 +65,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.7,
+    });
+  }
+
+  for (const category of categories) {
+    entries.push({
+      url: absoluteUrl(`/blog/categorie/${slugify(category)}`),
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.5,
     });
   }
 

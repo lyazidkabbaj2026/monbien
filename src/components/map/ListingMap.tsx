@@ -19,7 +19,8 @@ function MapSkeleton() {
 export function ListingMap({ lat, lng, label }: { lat: number; lng: number; label: string }) {
   return (
     <LazyVisible
-      className="h-[320px] overflow-hidden rounded-2xl"
+      // isolate : les panneaux Leaflet (z-index 400+) restent confinés ici
+      className="relative isolate z-0 h-[320px] overflow-hidden rounded-2xl"
       placeholder={<MapSkeleton />}
     >
       <ListingMapInner lat={lat} lng={lng} label={label} />

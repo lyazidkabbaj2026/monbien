@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { CSSProperties } from "react";
 import "./globals.css";
 import { site } from "../../site.config";
@@ -60,6 +62,8 @@ export default function RootLayout({
         <Footer />
         <WhatsAppSticky />
         <ValuationNudge />
+        <Analytics />
+        <SpeedInsights />
         {gaId && (
           <>
             <Script
