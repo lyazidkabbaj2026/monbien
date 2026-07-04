@@ -239,6 +239,22 @@ export default async function ListingsPage({
         </nav>
       )}
 
+      {/* CTA avant-première acheteur */}
+      <aside className="card mt-10 flex flex-col items-start justify-between gap-4 border-accent/25 bg-accent/[0.04] p-6 sm:flex-row sm:items-center">
+        <div>
+          <p className="text-[15px] font-bold text-ink">
+            Vous ne trouvez pas votre bonheur ?
+          </p>
+          <p className="mt-1 text-[13.5px] text-ink/60">
+            Les meilleurs biens partent avant publication. Déposez vos critères et
+            soyez prévenu en priorité.
+          </p>
+        </div>
+        <Link href="/avant-premiere" className="btn-outline shrink-0 !px-5 !py-2.5 text-[14px]">
+          Activer mon alerte avant-première
+        </Link>
+      </aside>
+
       {/* CTA vendeur */}
       <aside className="dark-surface mt-14 flex flex-col items-start justify-between gap-6 rounded-3xl p-8 text-white sm:flex-row sm:items-center sm:p-10">
         <div>

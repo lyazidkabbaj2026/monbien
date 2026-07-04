@@ -5,9 +5,10 @@ import { NavLinks } from "./NavLinks";
 
 // L'estimation est la CTA principale : elle n'apparaît pas en double dans le menu.
 export const NAV_LINKS = [
+  { href: "/vendre", label: "Vendre" },
   { href: "/annonces", label: "Annonces" },
   { href: "/prix-immobilier", label: "Prix au m²" },
-  { href: "/simulateur-credit", label: "Simulateur de crédit" },
+  { href: "/simulateur-credit", label: "Financer" },
   { href: "/blog", label: "Blog" },
 ];
 

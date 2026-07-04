@@ -22,6 +22,7 @@ export default async function AdminLayout({
                 { href: "/admin", label: "Leads" },
                 { href: "/admin/annonces", label: "Annonces" },
                 { href: "/admin/prix", label: "Prix au m²" },
+                { href: "/admin/blog", label: "Blog" },
                 { href: "/admin/stats", label: "Statistiques" },
               ].map((tab) => (
                 <Link

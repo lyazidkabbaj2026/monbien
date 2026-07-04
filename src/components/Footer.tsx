@@ -10,22 +10,23 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
       { href: "/immobilier/rabat/appartement-a-vendre", label: "Appartements à vendre à Rabat" },
       { href: "/immobilier/rabat/villa-a-vendre", label: "Villas à vendre à Rabat" },
       { href: "/immobilier/casablanca/appartement-a-vendre", label: "Appartements à Casablanca" },
-      { href: "/annonces?transaction=vente", label: "Toutes les ventes" },
+      { href: "/avant-premiere", label: "Biens en avant-première" },
+      { href: "/annonces", label: "Toutes les annonces" },
     ],
   },
   {
-    title: "Louer",
+    title: "Vendre",
     links: [
-      { href: "/immobilier/rabat/appartement-a-louer", label: "Appartements à louer à Rabat" },
+      { href: "/vendre", label: "Vendre mon bien" },
+      { href: "/estimer-mon-bien", label: "Estimation gratuite" },
       { href: "/quartiers/rabat/agdal", label: "Immobilier Agdal" },
       { href: "/quartiers/rabat/hay-riad", label: "Immobilier Hay Riad" },
-      { href: "/annonces?transaction=location", label: "Toutes les locations" },
     ],
   },
   {
     title: "Outils gratuits",
     links: [
-      { href: "/estimer-mon-bien", label: "Estimer mon bien" },
+      { href: "/capacite-emprunt", label: "Capacité d'emprunt" },
       { href: "/simulateur-credit", label: "Simulateur de crédit" },
       { href: "/prix-immobilier", label: "Carte des prix au m²" },
       { href: "/blog", label: "Guides & conseils" },

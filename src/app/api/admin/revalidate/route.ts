@@ -8,6 +8,9 @@ const ALLOWED_PREFIXES = [
   "/prix-immobilier",
   "/quartiers",
   "/immobilier",
+  "/blog",
+  "/rapport",
+  "/comparer",
 ];
 const SAFE_PATH = /^\/[a-z0-9/-]*$/;
 

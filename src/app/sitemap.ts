@@ -7,8 +7,10 @@ import {
   getPublishedPosts,
 } from "@/lib/data";
 import { allCombos } from "@/lib/programmatic";
+import { allPairs } from "@/lib/compare";
 import { absoluteUrl } from "@/lib/seo";
 import { slugify } from "@/lib/format";
+import { getCityPriceData } from "@/lib/data";
 
 export const revalidate = 21600;
 
@@ -25,8 +27,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = [
     { url: absoluteUrl("/"), lastModified: now, changeFrequency: "daily", priority: 1 },
     { url: absoluteUrl("/annonces"), lastModified: now, changeFrequency: "daily", priority: 0.9 },
+    { url: absoluteUrl("/vendre"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/estimer-mon-bien"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: absoluteUrl("/avant-premiere"), lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/simulateur-credit"), lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/capacite-emprunt"), lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/prix-immobilier"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/blog"), lastModified: now, changeFrequency: "daily", priority: 0.7 },
     { url: absoluteUrl("/mentions-legales"), lastModified: now, changeFrequency: "yearly", priority: 0.2 },
@@ -66,6 +71,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.7,
     });
+  }
+
+  // Comparateurs de quartiers (paires d'une même ville avec données de prix)
+  for (const city of cities) {
+    const rows = await getCityPriceData(city.id);
+    const slugsWithData = [
+      ...new Set(
+        rows
+          .filter((r) => r.transaction === "vente" && r.property_type === "appartement")
+          .map((r) => r.neighborhood.slug)
+      ),
+    ];
+    for (const [a, b] of allPairs(slugsWithData)) {
+      entries.push({
+        url: absoluteUrl(`/comparer/${city.slug}/${a}-vs-${b}`),
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.5,
+      });
+    }
   }
 
   for (const category of categories) {

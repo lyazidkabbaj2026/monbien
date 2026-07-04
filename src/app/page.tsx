@@ -8,6 +8,7 @@ import {
   MapPinned,
   Quote,
   Star,
+  Wallet,
 } from "lucide-react";
 import { site } from "../../site.config";
 import {
@@ -37,21 +38,28 @@ const TOOLS = [
     href: "/estimer-mon-bien",
     icon: HomeIcon,
     title: "Estimer mon bien",
-    text: "Recevez une fourchette de prix fiable en 2 minutes, basée sur les prix réels de votre quartier.",
+    text: "Une fourchette de prix fiable en 2 minutes, basée sur les prix réels de votre quartier.",
     cta: "Estimation gratuite",
+  },
+  {
+    href: "/capacite-emprunt",
+    icon: Wallet,
+    title: "Capacité d'emprunt",
+    text: "Combien les banques vous prêteront — et votre budget d'achat réel, frais déduits.",
+    cta: "Calculer mon budget",
   },
   {
     href: "/simulateur-credit",
     icon: Calculator,
     title: "Simulateur de crédit",
-    text: "Mensualité, coût total, tableau d'amortissement : calibrez votre financement avant de visiter.",
+    text: "Mensualité, coût total, tableau d'amortissement : calibrez votre financement.",
     cta: "Simuler mon crédit",
   },
   {
     href: "/prix-immobilier",
     icon: MapPinned,
     title: "Prix au m² par quartier",
-    text: "Carte interactive des prix de vente et de location, quartier par quartier, mise à jour en continu.",
+    text: "Carte interactive des prix de vente et de location, mise à jour en continu.",
     cta: "Voir la carte des prix",
   },
 ];
@@ -172,10 +180,10 @@ export default async function HomePage() {
           <Reveal>
             <p className="kicker !text-accent">Outils gratuits</p>
             <h2 className="h-section max-w-xl !text-white">
-              Trois outils pour décider avec des données, pas au feeling
+              Quatre outils pour décider avec des données, pas au feeling
             </h2>
           </Reveal>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {TOOLS.map((tool, i) => (
               <Reveal key={tool.href} delay={i * 80}>
                 <Link

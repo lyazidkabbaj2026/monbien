@@ -11,6 +11,7 @@ import {
   getNeighborhoods,
 } from "@/lib/data";
 import { comboSlug } from "@/lib/programmatic";
+import { duoSlug } from "@/lib/compare";
 import { formatNumber } from "@/lib/format";
 import { ogCard, pageMetadata } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -258,6 +259,27 @@ export default async function NeighborhoodPage({
                   </Link>
                 ))}
             </div>
+            {priceRows.length > 0 && (
+              <>
+                <h3 className="font-display mt-5 text-[15px] font-bold text-ink">
+                  Comparer {hood.name}
+                </h3>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {siblings
+                    .filter((s) => s.slug !== hood.slug)
+                    .slice(0, 4)
+                    .map((s) => (
+                      <Link
+                        key={s.slug}
+                        href={`/comparer/${city.slug}/${duoSlug(hood.slug, s.slug)}`}
+                        className="rounded-full border border-line bg-white px-3 py-1.5 text-[12.5px] font-medium text-ink/70 transition hover:border-accent hover:text-accent-deep"
+                      >
+                        vs {s.name}
+                      </Link>
+                    ))}
+                </div>
+              </>
+            )}
           </div>
         </aside>
       </div>
