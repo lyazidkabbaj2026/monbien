@@ -1,4 +1,23 @@
-# AUTOMATION.md — Publier des articles automatiquement
+# AUTOMATION.md — Automatisations du site
+
+Deux routines Claude Code tournent quotidiennement (gérables en discutant
+avec Claude, ou depuis la liste des routines) :
+
+1. **Blog quotidien** (07:30 Rabat) — rédige et publie un article via
+   `POST /api/blog/ingest` (détails ci-dessous).
+2. **Copilote commercial** (08:00 Rabat) — lit un instantané agrégé du
+   pipeline via la RPC `get_lead_briefing` (jeton `automation_token` dans
+   `app_secrets`, fonction SECURITY DEFINER : la clé anon seule ne peut pas
+   lire les leads) et envoie une notification : leads en attente +24 h avec
+   liens WhatsApp, nouveaux leads, rapprochements acheteurs ↔ nouvelles
+   annonces, bilan hebdomadaire le lundi. Silencieuse (« RAS ») quand le
+   pipeline est à jour.
+
+Pour changer un jeton d'automatisation :
+`update app_secrets set value = 'NOUVEAU' where key = 'automation_token';`
+(ou `blog_ingest_token`) puis mettre à jour la routine/variable concernée.
+
+# Publier des articles automatiquement
 
 Le blog est **piloté par la base de données** : insérer une ligne publiée dans
 `blog_posts` suffit pour qu'un article soit en ligne, **sans redéploiement**.
