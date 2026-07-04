@@ -48,6 +48,7 @@ export function LeadForm({
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [whatsappUrl, setWhatsappUrl] = useState<string>("");
+  const [reportUrl, setReportUrl] = useState<string>("");
 
   function validate(): boolean {
     const next: Errors = {};
@@ -81,8 +82,13 @@ export function LeadForm({
         }),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const json = (await res.json()) as { leadId: string; whatsappUrl: string };
+      const json = (await res.json()) as {
+        leadId: string;
+        whatsappUrl: string;
+        reportUrl?: string;
+      };
       setWhatsappUrl(json.whatsappUrl);
+      if (json.reportUrl) setReportUrl(json.reportUrl);
       setStatus("success");
       track("generate_lead", { source, source_ref: sourceRef });
       onSuccess?.(json);
@@ -100,6 +106,11 @@ export function LeadForm({
         <CheckCircle2 className="mx-auto h-10 w-10 text-primary" aria-hidden />
         <p className="font-display mt-3 text-lg font-bold text-ink">{successTitle}</p>
         <p className="mt-1 text-[14px] text-ink/65">{successText}</p>
+        {reportUrl && (
+          <a href={reportUrl} className="btn-primary mt-5 w-full">
+            Consulter mon rapport maintenant
+          </a>
+        )}
         {whatsappUrl && (
           <a
             href={whatsappUrl}

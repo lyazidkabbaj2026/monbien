@@ -105,7 +105,8 @@ export default async function PriceIndexPage() {
               sourceRef={site.defaultCitySlug}
               city={site.defaultCity}
               cta="Recevoir le rapport complet"
-              successText="Votre rapport arrive très vite sur WhatsApp ou par email."
+              successTitle="Votre rapport est prêt !"
+              successText="Consultez-le dès maintenant — il vous a aussi été envoyé par email si vous l'avez renseigné."
             />
           </div>
         </Reveal>

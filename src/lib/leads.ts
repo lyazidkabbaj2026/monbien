@@ -39,6 +39,38 @@ export async function insertLead(input: LeadInput): Promise<string> {
   return data as string;
 }
 
+/**
+ * Envoie le rapport de marché au lead par email (silencieux si
+ * RESEND_API_KEY absent — le lien reste affiché sur le site et
+ * envoyable en un clic depuis /admin).
+ */
+export async function sendReportEmail(
+  email: string,
+  name: string,
+  cityName: string,
+  reportUrl: string
+): Promise<void> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return;
+  try {
+    const resend = new Resend(apiKey);
+    await resend.emails.send({
+      from: process.env.LEAD_NOTIFICATION_FROM || `${site.brandName} <onboarding@resend.dev>`,
+      to: email,
+      subject: `Votre rapport du marché immobilier — ${cityName}`,
+      html: `<div style="font-family:system-ui,sans-serif;max-width:560px">
+        <h2 style="color:#0F4C5C">Bonjour ${name},</h2>
+        <p style="font-size:15px;line-height:1.6">Comme promis, voici votre rapport complet du marché immobilier de <strong>${cityName}</strong> : prix au m² par quartier, écarts, rendements et recommandations.</p>
+        <p style="margin:24px 0"><a href="${reportUrl}" style="background:#E36414;color:#fff;padding:12px 24px;border-radius:10px;text-decoration:none;font-weight:700">Consulter mon rapport</a></p>
+        <p style="font-size:14px;line-height:1.6;color:#555">Une question sur un quartier ou un bien précis ? Répondez à cet email ou écrivez-nous sur WhatsApp : nous répondons ${site.agent.responseTime.toLowerCase()}.</p>
+        <p style="font-size:13px;color:#889">${site.agent.name} · ${site.brandName} — ${site.tagline}</p>
+      </div>`,
+    });
+  } catch (err) {
+    console.error("[leads] report email failed:", err);
+  }
+}
+
 /** Notifie le propriétaire par email (silencieux si RESEND_API_KEY absent). */
 export async function notifyOwner(
   input: LeadInput,

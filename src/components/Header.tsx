@@ -13,7 +13,7 @@ export const NAV_LINKS = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-sand/85 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-line bg-sand/85 backdrop-blur-md print:hidden">
       <div className="wrap flex h-16 items-center justify-between gap-4">
         <Logo />
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Navigation principale">

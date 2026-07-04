@@ -35,7 +35,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
 
 export function Footer() {
   return (
-    <footer className="dark-surface mt-20 text-white">
+    <footer className="dark-surface mt-20 text-white print:hidden">
       <div className="wrap grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <Logo onDark />

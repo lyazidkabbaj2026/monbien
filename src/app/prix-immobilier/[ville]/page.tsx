@@ -131,7 +131,8 @@ export default async function CityPricePage({
               sourceRef={city.slug}
               city={city.name}
               cta="Recevoir le rapport gratuit"
-              successText="Votre rapport arrive très vite sur WhatsApp ou par email."
+              successTitle="Votre rapport est prêt !"
+              successText="Consultez-le dès maintenant — il vous a aussi été envoyé par email si vous l'avez renseigné."
             />
           </div>
         </Reveal>

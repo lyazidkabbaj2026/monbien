@@ -4,7 +4,7 @@ import { supabaseServer } from "@/lib/supabase/server";
 import type { Lead, LeadSource, LeadStatus, Valuation } from "@/lib/types";
 import { formatPrice } from "@/lib/format";
 import { LeadStatusSelect } from "@/components/admin/LeadStatusSelect";
-import { pageMetadata } from "@/lib/seo";
+import { absoluteUrl, pageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -220,6 +220,18 @@ export default async function AdminPage({
                     >
                       Appeler
                     </a>
+                    {typeof lead.payload?.report_path === "string" && (
+                      <a
+                        href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
+                          `Bonjour ${lead.name}, voici votre rapport complet du marché immobilier comme promis : ${absoluteUrl(lead.payload.report_path as string)} — je reste disponible pour le commenter ensemble !`
+                        )}`}
+                        target="_blank"
+                        rel="noopener"
+                        className="mt-1 block font-bold text-accent hover:underline"
+                      >
+                        Envoyer le rapport
+                      </a>
+                    )}
                   </td>
                 </tr>
               );

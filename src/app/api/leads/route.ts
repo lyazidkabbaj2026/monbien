@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import { clientIp, rateLimit } from "@/lib/rateLimit";
-import { insertLead, type LeadInput } from "@/lib/leads";
+import { insertLead, notifyOwner, sendReportEmail, type LeadInput } from "@/lib/leads";
+import { getCityBySlug } from "@/lib/data";
+import { absoluteUrl } from "@/lib/seo";
 import { waLink, waMessages } from "@/lib/whatsapp";
-import { notifyOwner } from "@/lib/leads";
 import type { LeadSource } from "@/lib/types";
 
 const VALID_SOURCES: LeadSource[] = [
@@ -56,12 +57,28 @@ export async function POST(request: Request) {
         : {},
   };
 
+  // Lead « carte des prix » : le rapport de marché est le livrable promis.
+  let reportPath: string | null = null;
+  let reportCityName: string | null = null;
+  if (source === "price_map" && input.sourceRef) {
+    const reportCity = await getCityBySlug(input.sourceRef);
+    if (reportCity) {
+      reportPath = `/rapport/${reportCity.slug}`;
+      reportCityName = reportCity.name;
+      input.payload = { ...input.payload, report_path: reportPath };
+    }
+  }
+
   try {
     const leadId = await insertLead(input);
     await notifyOwner(input);
+    if (reportPath && reportCityName && input.email) {
+      await sendReportEmail(input.email, name, reportCityName, absoluteUrl(reportPath));
+    }
     return NextResponse.json({
       leadId,
       whatsappUrl: waLink(waMessages.afterLead(name)),
+      reportUrl: reportPath ?? undefined,
     });
   } catch (err) {
     console.error("[api/leads]", err);
