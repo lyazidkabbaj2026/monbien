@@ -79,7 +79,7 @@ export function CityPriceBlock({ city, points }: { city: City; points: PricePoin
                 <td className="px-4 py-3">
                   <Link
                     href={point.href}
-                    className="font-semibold text-primary hover:underline"
+                    className="inline-block py-1.5 font-semibold text-primary hover:underline"
                   >
                     {point.name}
                   </Link>

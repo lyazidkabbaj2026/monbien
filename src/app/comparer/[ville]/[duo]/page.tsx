@@ -241,17 +241,18 @@ export default async function ComparePage({
 
       {/* Tableau comparatif */}
       <section className="wrap py-10 sm:py-14">
-        <div className="card overflow-x-auto">
-          <table className="w-full min-w-[560px] text-[14.5px]">
+        {/* Tient sans défilement horizontal, même à 320 px */}
+        <div className="card overflow-hidden">
+          <table className="w-full text-[12.5px] sm:text-[14.5px]">
             <thead>
               <tr className="bg-primary-soft text-left">
-                <th className="px-5 py-4 text-[12px] font-bold tracking-wide text-ink/55 uppercase">
+                <th className="px-3 py-3.5 text-[11px] font-bold tracking-wide text-ink/55 uppercase sm:px-5 sm:py-4 sm:text-[12px]">
                   Indicateur
                 </th>
-                <th className="font-display px-5 py-4 text-[16px] font-bold text-primary">
+                <th className="font-display px-3 py-3.5 text-[14px] font-bold text-primary sm:px-5 sm:py-4 sm:text-[16px]">
                   {a.name}
                 </th>
-                <th className="font-display px-5 py-4 text-[16px] font-bold text-primary">
+                <th className="font-display px-3 py-3.5 text-[14px] font-bold text-primary sm:px-5 sm:py-4 sm:text-[16px]">
                   {b.name}
                 </th>
               </tr>
@@ -259,9 +260,11 @@ export default async function ComparePage({
             <tbody>
               {rows.map((row) => (
                 <tr key={row.label} className="border-t border-line/70">
-                  <td className="px-5 py-3.5 font-semibold text-ink/70">{row.label}</td>
-                  <td className="px-5 py-3.5 font-bold text-ink">{row.a}</td>
-                  <td className="px-5 py-3.5 font-bold text-ink">{row.b}</td>
+                  <td className="px-3 py-3 font-semibold text-ink/70 sm:px-5 sm:py-3.5">
+                    {row.label}
+                  </td>
+                  <td className="px-3 py-3 font-bold text-ink sm:px-5 sm:py-3.5">{row.a}</td>
+                  <td className="px-3 py-3 font-bold text-ink sm:px-5 sm:py-3.5">{row.b}</td>
                 </tr>
               ))}
             </tbody>
@@ -323,19 +326,17 @@ export default async function ComparePage({
                 <>
                   <p>
                     <strong>Budget maîtrisé ou investissement locatif :</strong>{" "}
-                    {cheaper.name} offre le meilleur ticket d&apos;entrée
-                    {betterYield?.slug === cheaper.slug && betterYield.yieldPct
-                      ? ` et le meilleur rendement brut estimé (${betterYield.yieldPct.toFixed(1)} %)`
-                      : ""}
-                    . À surface égale, l&apos;économie représente environ{" "}
-                    {formatNumber(Math.round(((pricier.vente! - cheaper.vente!) * 90) / 10_000) * 10_000)}{" "}
-                    MAD sur un 90 m².
+                    {`${cheaper.name} offre le meilleur ticket d'entrée${
+                      betterYield?.slug === cheaper.slug && betterYield.yieldPct
+                        ? ` et le meilleur rendement brut estimé (${betterYield.yieldPct.toFixed(1)} %)`
+                        : ""
+                    }. À surface égale, l'économie représente environ ${formatNumber(
+                      Math.round(((pricier.vente! - cheaper.vente!) * 90) / 10_000) * 10_000
+                    )} MAD sur un 90 m².`}
                   </p>
                   <p>
-                    <strong>Patrimoine et revente :</strong> {pricier.name} paie son
-                    standing — une demande plus profonde, souvent une meilleure
-                    liquidité à la revente. Les {diffPct} % d&apos;écart sont le prix
-                    de cette sécurité.
+                    <strong>Patrimoine et revente :</strong>{" "}
+                    {`${pricier.name} paie son standing — une demande plus profonde, souvent une meilleure liquidité à la revente. Les ${diffPct} % d'écart sont le prix de cette sécurité.`}
                   </p>
                 </>
               )}

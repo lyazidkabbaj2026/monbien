@@ -196,28 +196,32 @@ export default async function NeighborhoodReportPage({
         {/* Détail des prix */}
         <section className="mt-12">
           <h2 className="h-section !text-xl">Prix détaillés à {hood.name}</h2>
-          <div className="card mt-4 overflow-x-auto">
-            <table className="w-full min-w-[480px] text-[14px]">
-              <thead className="bg-primary-soft text-left text-[12px] tracking-wide text-ink/55 uppercase">
+          <div className="card mt-4 overflow-hidden">
+            <table className="w-full text-[13px] sm:text-[14px]">
+              <thead className="bg-primary-soft text-left text-[11px] tracking-wide text-ink/55 uppercase sm:text-[12px]">
                 <tr>
-                  <th className="px-5 py-3 font-bold">Type de bien</th>
-                  <th className="px-5 py-3 font-bold">Transaction</th>
-                  <th className="px-5 py-3 font-bold">Prix moyen</th>
-                  <th className="px-5 py-3 font-bold">Échantillon</th>
+                  <th className="px-3 py-3 font-bold sm:px-5">Type de bien</th>
+                  <th className="px-3 py-3 font-bold sm:px-5">Transaction</th>
+                  <th className="px-3 py-3 font-bold sm:px-5">Prix moyen</th>
+                  <th className="hidden px-5 py-3 font-bold sm:table-cell">Échantillon</th>
                 </tr>
               </thead>
               <tbody>
                 {hoodRows.map((row) => (
                   <tr key={row.id} className="border-t border-line/70">
-                    <td className="px-5 py-3 font-semibold text-ink">
+                    <td className="px-3 py-3 font-semibold text-ink sm:px-5">
                       {typeLabel(row.property_type)}
                     </td>
-                    <td className="px-5 py-3 text-ink/65 capitalize">{row.transaction}</td>
-                    <td className="px-5 py-3 font-bold text-primary">
+                    <td className="px-3 py-3 text-ink/65 capitalize sm:px-5">
+                      {row.transaction}
+                    </td>
+                    <td className="px-3 py-3 font-bold text-primary sm:px-5">
                       {formatNumber(Number(row.avg_price_per_m2))} MAD/m²
                       {row.transaction === "location" ? "/mois" : ""}
                     </td>
-                    <td className="px-5 py-3 text-ink/55">{row.sample_size} biens</td>
+                    <td className="hidden px-5 py-3 text-ink/55 sm:table-cell">
+                      {row.sample_size} biens
+                    </td>
                   </tr>
                 ))}
               </tbody>

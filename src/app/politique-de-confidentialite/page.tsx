@@ -21,10 +21,7 @@ export default function PrivacyPolicyPage() {
 
       <div className="prose-blog mt-8">
         <p>
-          {site.brandName} accorde une grande importance à la protection de vos
-          données personnelles, conformément à la loi marocaine n° 09-08 relative à
-          la protection des personnes physiques à l&apos;égard du traitement des
-          données à caractère personnel.
+          {`${site.brandName} accorde une grande importance à la protection de vos données personnelles, conformément à la loi marocaine n° 09-08 relative à la protection des personnes physiques à l'égard du traitement des données à caractère personnel.`}
         </p>
 
         <h2>Données collectées</h2>

@@ -190,6 +190,14 @@ body {
   }
 }
 
+/* Boutons de zoom Leaflet : cibles tactiles confortables sur mobile */
+.leaflet-touch .leaflet-bar a {
+  width: 38px;
+  height: 38px;
+  line-height: 38px;
+  font-size: 20px;
+}
+
 /* Surfaces décoratives en dégradés (aucune image = 0 coût LCP) */
 .hero-surface {
   background:

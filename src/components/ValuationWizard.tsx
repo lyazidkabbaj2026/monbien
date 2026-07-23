@@ -174,11 +174,11 @@ export function ValuationWizard({
     <div>
       {/* Barre de progression */}
       <div className="mb-8">
-        <div className="flex justify-between text-[12px] font-semibold text-ink/50">
-          <span className={step >= 0 ? "text-primary" : ""}>Type de bien</span>
-          <span className={step >= 1 ? "text-primary" : ""}>Localisation</span>
+        <div className="flex justify-between gap-2 text-[11px] font-semibold text-ink/50 sm:text-[12px]">
+          <span className={step >= 0 ? "text-primary" : ""}>Type</span>
+          <span className={step >= 1 ? "text-primary" : ""}>Lieu</span>
           <span className={step >= 2 ? "text-primary" : ""}>Détails</span>
-          <span className={step >= 3 ? "text-primary" : ""}>Estimation</span>
+          <span className={step >= 3 ? "text-primary" : ""}>Résultat</span>
         </div>
         <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-line">
           <div

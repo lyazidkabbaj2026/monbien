@@ -115,7 +115,7 @@ export function BuyerSearchForm({
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
       {/* Critères */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="bsf-tx" className="label">
             Vous cherchez à *
@@ -151,7 +151,7 @@ export function BuyerSearchForm({
           </select>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="bsf-city" className="label">
             Ville *

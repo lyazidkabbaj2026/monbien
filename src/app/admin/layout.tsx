@@ -17,7 +17,10 @@ export default async function AdminLayout({
       {user && (
         <div className="border-b border-line bg-white/70">
           <div className="wrap flex items-center justify-between gap-4 py-3">
-            <nav aria-label="Navigation admin" className="flex gap-1">
+            <nav
+              aria-label="Navigation admin"
+              className="-mx-1 flex min-w-0 flex-1 gap-1 overflow-x-auto px-1 whitespace-nowrap [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
               {[
                 { href: "/admin", label: "Leads" },
                 { href: "/admin/annonces", label: "Annonces" },
@@ -28,7 +31,7 @@ export default async function AdminLayout({
                 <Link
                   key={tab.href}
                   href={tab.href}
-                  className="rounded-lg px-3.5 py-2 text-[13.5px] font-semibold text-ink/65 transition hover:bg-primary-soft hover:text-primary"
+                  className="shrink-0 rounded-lg px-3.5 py-2 text-[13.5px] font-semibold text-ink/65 transition hover:bg-primary-soft hover:text-primary"
                 >
                   {tab.label}
                 </Link>

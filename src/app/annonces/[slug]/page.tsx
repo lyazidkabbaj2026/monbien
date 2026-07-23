@@ -142,10 +142,10 @@ export default async function ListingPage({
           </h1>
           {location && <p className="mt-2 text-[15px] text-ink/60">{location}</p>}
           <p className="font-display mt-4 text-3xl font-bold text-primary">
-            {formatListingPrice(listing.price, listing.transaction, listing.currency)}
+            {formatListingPrice(listing.price, listing.transaction, listing.currency)}{" "}
             {pricePerM2 && (
-              <span className="ml-3 align-middle text-[14px] font-semibold text-ink/50">
-                soit {formatNumber(pricePerM2)} MAD/m²
+              <span className="mt-1 block text-[14px] font-semibold text-ink/50 sm:mt-0 sm:ml-3 sm:inline sm:align-middle">
+                {`soit ${formatNumber(pricePerM2)} MAD/m²`}
               </span>
             )}
           </p>

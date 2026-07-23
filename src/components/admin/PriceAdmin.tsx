@@ -327,7 +327,8 @@ export function PriceAdmin({ cities }: { cities: City[] }) {
                   </h2>
 
                   {hoodRows.length > 0 && (
-                    <table className="mt-3 w-full text-[13.5px]">
+                    <div className="-mx-1 overflow-x-auto px-1">
+                    <table className="mt-3 w-full min-w-[430px] text-[13.5px]">
                       <thead className="text-left text-[11.5px] tracking-wide text-ink/50 uppercase">
                         <tr>
                           <th className="py-1.5 pr-3 font-bold">Type</th>
@@ -405,6 +406,7 @@ export function PriceAdmin({ cities }: { cities: City[] }) {
                         })}
                       </tbody>
                     </table>
+                    </div>
                   )}
 
                   {/* Description éditoriale */}

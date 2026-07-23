@@ -108,9 +108,7 @@ export default function ProfessionalsPage() {
             </h1>
             <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-ink/70">
               Promoteurs, entreprises, banques, notaires, investisseurs :{" "}
-              {site.brandName} met sa connaissance du terrain rabati, sa base
-              d&apos;acheteurs qualifiés et ses données de prix au service de vos
-              opérations.
+              {`${site.brandName} met sa connaissance du terrain rabati, sa base d'acheteurs qualifiés et ses données de prix au service de vos opérations.`}
             </p>
           </div>
         </div>

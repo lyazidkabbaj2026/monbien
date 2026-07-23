@@ -13,7 +13,10 @@ export function Breadcrumbs({ items }: { items: { name: string; path: string }[]
             <li key={item.path} className="flex items-center gap-1.5">
               {i > 0 && <ChevronRight className="h-3.5 w-3.5 shrink-0" aria-hidden />}
               {i < items.length - 1 ? (
-                <Link href={item.path} className="transition hover:text-primary">
+                <Link
+                  href={item.path}
+                  className="inline-block py-1.5 transition hover:text-primary"
+                >
                   {item.name}
                 </Link>
               ) : (

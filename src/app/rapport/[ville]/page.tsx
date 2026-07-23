@@ -125,15 +125,15 @@ export default async function CityReportPage({
           <h2 className="h-section !text-xl">
             Prix par quartier à {city.name}
           </h2>
-          <div className="card mt-4 overflow-x-auto">
-            <table className="w-full min-w-[520px] text-[14px]">
-              <thead className="bg-primary-soft text-left text-[12px] tracking-wide text-ink/55 uppercase">
+          <div className="card mt-4 overflow-hidden">
+            <table className="w-full text-[12.5px] sm:text-[14px]">
+              <thead className="bg-primary-soft text-left text-[11px] tracking-wide text-ink/55 uppercase sm:text-[12px]">
                 <tr>
-                  <th className="px-5 py-3 font-bold">Quartier</th>
-                  <th className="px-5 py-3 font-bold">Vente</th>
-                  <th className="px-5 py-3 font-bold">Location</th>
-                  <th className="px-5 py-3 font-bold">vs moyenne</th>
-                  <th className="px-5 py-3 font-bold print:hidden">Rapport détaillé</th>
+                  <th className="px-3 py-3 font-bold sm:px-5">Quartier</th>
+                  <th className="px-3 py-3 font-bold sm:px-5">Vente</th>
+                  <th className="px-3 py-3 font-bold sm:px-5">Location</th>
+                  <th className="hidden px-5 py-3 font-bold md:table-cell">vs moyenne</th>
+                  <th className="px-3 py-3 font-bold sm:px-5 print:hidden">Détail</th>
                 </tr>
               </thead>
               <tbody>
@@ -144,16 +144,18 @@ export default async function CityReportPage({
                       : null;
                   return (
                     <tr key={point.slug} className="border-t border-line/70">
-                      <td className="px-5 py-3 font-semibold text-ink">{point.name}</td>
-                      <td className="px-5 py-3 font-bold text-primary">
+                      <td className="px-3 py-3 font-semibold text-ink sm:px-5">
+                        {point.name}
+                      </td>
+                      <td className="px-3 py-3 font-bold text-primary sm:px-5">
                         {point.vente ? `${formatNumber(point.vente)} MAD/m²` : "—"}
                       </td>
-                      <td className="px-5 py-3 text-ink/70">
+                      <td className="px-3 py-3 text-ink/70 sm:px-5">
                         {point.location
                           ? `${formatNumber(point.location)} MAD/m²/mois`
                           : "—"}
                       </td>
-                      <td className="px-5 py-3">
+                      <td className="hidden px-5 py-3 md:table-cell">
                         {diff != null ? (
                           <span
                             className={`font-bold ${diff >= 0 ? "text-accent-deep" : "text-primary"}`}
@@ -165,10 +167,10 @@ export default async function CityReportPage({
                           "—"
                         )}
                       </td>
-                      <td className="px-5 py-3 print:hidden">
+                      <td className="px-3 py-3 sm:px-5 print:hidden">
                         <Link
                           href={`/rapport/${city.slug}/${point.slug}`}
-                          className="inline-flex items-center gap-1 text-[13px] font-semibold text-primary hover:underline"
+                          className="inline-flex items-center gap-1 py-1 text-[13px] font-semibold text-primary hover:underline"
                         >
                           Voir
                           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
