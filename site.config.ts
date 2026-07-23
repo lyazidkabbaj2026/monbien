@@ -4,10 +4,11 @@
 export const site = {
   brandName: "HomeFinder",
   tagline: "L'immobilier à Rabat, en toute confiance",
-  domain: "", // ex. "www.homefinder.ma" — laisser vide tant que le domaine n'est pas acheté
-  whatsappNumber: "2126XXXXXXXX", // format international, sans +
-  contactEmail: "leads@example.ma",
+  domain: "", // ex. "www.homefinder.ma" — à renseigner quand le domaine pointera vers le site
+  whatsappNumber: "212689121401", // format international, sans +
+  contactEmail: "contact@homefinder.ma",
   instagram: "https://www.instagram.com/rabat_home_finder/",
+  tiktok: "https://www.tiktok.com/@rabathomefinder",
   defaultCity: "Rabat",
   defaultCitySlug: "rabat",
   locale: "fr",
@@ -26,7 +27,7 @@ export const site = {
     role: "Fondateur & conseiller immobilier",
     photo: "/agent.jpg", // remplacer par une vraie photo dans /public
     responseTime: "Réponse sous 15 min",
-    phoneDisplay: "+212 6XX XX XX XX",
+    phoneDisplay: "+212 689 121 401",
   },
   proof: {
     yearsExperience: 8,
