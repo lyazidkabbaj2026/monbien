@@ -67,6 +67,8 @@ export function localBusinessJsonLd() {
     name: site.brandName,
     description: site.tagline,
     url: siteUrl(),
+    logo: absoluteUrl("/apple-icon"),
+    image: absoluteUrl("/apple-icon"),
     sameAs: [site.instagram, site.tiktok].filter(Boolean),
     email: site.contactEmail,
     telephone: `+${site.whatsappNumber}`,
