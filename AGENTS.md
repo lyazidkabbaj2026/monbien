@@ -4,7 +4,7 @@
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
-# MonBien — notes pour agents
+# HomeFinder — notes pour agents
 
 Site de génération de leads immobiliers (français, Maroc/Rabat). Next.js App
 Router + TypeScript + Tailwind v4 + Supabase. Voir `README.md` (architecture)

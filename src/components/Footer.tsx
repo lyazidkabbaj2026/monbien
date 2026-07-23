@@ -44,14 +44,40 @@ export function Footer() {
             {site.tagline}. Estimation gratuite, accompagnement de A à Z et
             réponse rapide sur WhatsApp.
           </p>
-          <a
-            href={waLink(waMessages.generic)}
-            target="_blank"
-            rel="noopener"
-            className="btn-whatsapp mt-5 !px-5 !py-2.5 text-[14px]"
-          >
-            Discuter sur WhatsApp
-          </a>
+          <div className="mt-5 flex items-center gap-3">
+            <a
+              href={waLink(waMessages.generic)}
+              target="_blank"
+              rel="noopener"
+              className="btn-whatsapp !px-5 !py-2.5 text-[14px]"
+            >
+              Discuter sur WhatsApp
+            </a>
+            {site.instagram && (
+              <a
+                href={site.instagram}
+                target="_blank"
+                rel="noopener"
+                aria-label={`${site.brandName} sur Instagram`}
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 text-white/80 transition hover:border-white/50 hover:text-white"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-5 w-5"
+                  aria-hidden
+                >
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                </svg>
+              </a>
+            )}
+          </div>
         </div>
         {COLUMNS.map((col) => (
           <nav key={col.title} aria-label={col.title}>

@@ -47,7 +47,7 @@ Content-Type: application/json
   "category": "Investissement",
   "tags": ["location", "rabat", "investissement"],
   "hero_image": "https://images.unsplash.com/photo-XXXX?auto=format&fit=crop&w=1600&q=80",
-  "author": "MonBien",
+  "author": "HomeFinder",
   "slug": "louer-meuble-ou-vide-rabat"
 }
 ```

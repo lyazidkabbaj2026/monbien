@@ -87,7 +87,7 @@ const STEPS = [
 
 const FAQS: Faq[] = [
   {
-    question: "Combien coûte la vente avec MonBien ?",
+    question: `Combien coûte la vente avec ${site.brandName} ?`,
     answer:
       "Nos honoraires sont annoncés clairement avant la signature du mandat — aucun frais caché, rien à payer tant que la vente n'est pas conclue. L'estimation et le plan de vente sont gratuits et sans engagement.",
   },

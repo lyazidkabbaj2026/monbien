@@ -67,6 +67,7 @@ export function localBusinessJsonLd() {
     name: site.brandName,
     description: site.tagline,
     url: siteUrl(),
+    sameAs: site.instagram ? [site.instagram] : undefined,
     email: site.contactEmail,
     telephone: `+${site.whatsappNumber}`,
     areaServed: { "@type": "City", name: site.defaultCity },

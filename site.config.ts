@@ -2,11 +2,12 @@
 // Rebrander le site = changer brandName (et le logo dans src/components/Logo.tsx).
 
 export const site = {
-  brandName: "MonBien",
+  brandName: "HomeFinder",
   tagline: "L'immobilier à Rabat, en toute confiance",
-  domain: "", // ex. "www.monbien.ma" — laisser vide tant que le domaine n'est pas acheté
+  domain: "", // ex. "www.homefinder.ma" — laisser vide tant que le domaine n'est pas acheté
   whatsappNumber: "2126XXXXXXXX", // format international, sans +
   contactEmail: "leads@example.ma",
+  instagram: "https://www.instagram.com/rabat_home_finder/",
   defaultCity: "Rabat",
   defaultCitySlug: "rabat",
   locale: "fr",
