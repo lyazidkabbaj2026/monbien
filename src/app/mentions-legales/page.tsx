@@ -61,7 +61,7 @@ export default function LegalNoticePage() {
 
         <h2>Responsabilité</h2>
         <p>
-          {site.brandName} s&apos;efforce d&apos;assurer l&apos;exactitude des
+          {`${site.brandName} s'efforce d'assurer l'exactitude des`}{" "}
           informations publiées mais ne saurait être tenu responsable des erreurs,
           omissions ou de l&apos;indisponibilité temporaire du service. Les liens
           externes ne relèvent pas de la responsabilité de l&apos;éditeur.
