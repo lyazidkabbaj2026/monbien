@@ -148,8 +148,8 @@ export function ValuationWizard({
         </div>
         <p className="mx-auto mt-5 max-w-md text-[14px] leading-relaxed text-ink/65">
           Cette fourchette est indicative. Pour un <strong>prix de vente précis</strong>{" "}
-          (exposition, étage, prestations, travaux), {site.agent.name} vous propose une
-          contre-visite gratuite et sans engagement.
+          (exposition, étage, prestations, travaux), l&apos;équipe {site.brandName} vous
+          propose une contre-visite gratuite et sans engagement.
         </p>
         {result.whatsappUrl && (
           <a

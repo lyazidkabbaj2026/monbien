@@ -23,9 +23,9 @@ export const site = {
 
   // Signaux de confiance affichés près des formulaires / sections preuve sociale
   agent: {
-    name: "Yazid K.",
-    role: "Fondateur & conseiller immobilier",
-    photo: "/agent.jpg", // remplacer par une vraie photo dans /public
+    name: "L'équipe HomeFinder",
+    role: "Conseillers immobiliers à Rabat",
+    photo: "", // optionnel : photo d'équipe dans /public
     responseTime: "Réponse sous 15 min",
     phoneDisplay: "+212 689 121 401",
   },

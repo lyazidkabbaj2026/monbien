@@ -163,7 +163,7 @@ export default async function SellPage() {
                   className="btn-outline"
                 >
                   <WhatsAppIcon className="h-5 w-5 text-whatsapp" />
-                  Parler à {site.agent.name.split(" ")[0]}
+                  Parler à un conseiller
                 </WaButton>
               </div>
               <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-[13.5px] text-ink/60">

@@ -13,7 +13,7 @@ export function AgentCard({ compact = false }: { compact?: boolean }) {
         aria-hidden
         className="font-display flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-lg font-bold text-white"
       >
-        {site.agent.name.charAt(0)}
+        {site.brandName.charAt(0)}
       </span>
       <div className="min-w-0">
         <p className="text-[14.5px] leading-tight font-bold text-ink">

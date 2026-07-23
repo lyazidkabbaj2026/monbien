@@ -40,7 +40,7 @@ const REASSURANCE = [
   {
     icon: BadgeCheck,
     title: "Affinage par un expert",
-    text: `${site.agent.name} peut affiner l'estimation sur place, gratuitement.`,
+    text: "Un conseiller affine l'estimation sur place, gratuitement.",
   },
 ];
 

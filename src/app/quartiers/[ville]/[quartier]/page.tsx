@@ -87,7 +87,7 @@ export default async function NeighborhoodPage({
     },
     {
       question: `Je vends un bien à ${hood.name} : par où commencer ?`,
-      answer: `Commencez par une estimation objective basée sur les prix réels du quartier — c'est gratuit et immédiat sur notre site. ${site.agent.name} peut ensuite affiner sur place et vous proposer un plan de commercialisation. ${site.agent.responseTime} sur WhatsApp.`,
+      answer: `Commencez par une estimation objective basée sur les prix réels du quartier — c'est gratuit et immédiat sur notre site. Notre équipe peut ensuite affiner sur place et vous proposer un plan de commercialisation. ${site.agent.responseTime} sur WhatsApp.`,
     },
   ].filter(Boolean) as Faq[];
 

@@ -218,9 +218,9 @@ export default async function HomePage() {
               Un seul interlocuteur, de l&apos;estimation à la signature
             </h2>
             <p className="mt-4 max-w-md text-[15.5px] leading-relaxed text-ink/70">
-              Pas de plateforme anonyme : vous échangez directement avec{" "}
-              {site.agent.name}, qui connaît chaque quartier de {site.defaultCity} et
-              négocie pour vous.
+              Pas de plateforme anonyme : vous échangez directement avec
+              l&apos;équipe {site.brandName}, qui connaît chaque quartier de{" "}
+              {site.defaultCity} et négocie pour vous.
             </p>
             <div className="mt-6 max-w-sm">
               <AgentCard />

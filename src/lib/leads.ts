@@ -63,7 +63,7 @@ export async function sendReportEmail(
         <p style="font-size:15px;line-height:1.6">Comme promis, voici votre rapport complet du marché immobilier de <strong>${cityName}</strong> : prix au m² par quartier, écarts, rendements et recommandations.</p>
         <p style="margin:24px 0"><a href="${reportUrl}" style="background:#E36414;color:#fff;padding:12px 24px;border-radius:10px;text-decoration:none;font-weight:700">Consulter mon rapport</a></p>
         <p style="font-size:14px;line-height:1.6;color:#555">Une question sur un quartier ou un bien précis ? Répondez à cet email ou écrivez-nous sur WhatsApp : nous répondons ${site.agent.responseTime.toLowerCase()}.</p>
-        <p style="font-size:13px;color:#889">${site.agent.name} · ${site.brandName} — ${site.tagline}</p>
+        <p style="font-size:13px;color:#889">${site.brandName} — ${site.tagline}</p>
       </div>`,
     });
   } catch (err) {

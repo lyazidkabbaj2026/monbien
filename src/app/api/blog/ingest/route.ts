@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { supabasePublic } from "@/lib/supabase/public";
+import { pickHeroImage } from "@/lib/blogImages";
 import { slugify } from "@/lib/format";
 
 /**
@@ -42,6 +43,29 @@ export async function POST(request: Request) {
       : slugify(title);
 
   const tags = Array.isArray(body.tags) ? body.tags.map(String) : [];
+  const category = typeof body.category === "string" ? body.category : null;
+
+  // Image de couverture : attribuée côté serveur (adaptée à la catégorie,
+  // sans réutiliser celles des articles récents). Une image fournie n'est
+  // respectée que si elle ne vient pas d'être utilisée.
+  const { data: recentPosts } = await supabasePublic()
+    .from("blog_posts")
+    .select("hero_image")
+    .eq("status", "published")
+    .order("published_at", { ascending: false })
+    .limit(15);
+  const recentHeroes = (recentPosts ?? [])
+    .map((p) => p.hero_image as string | null)
+    .filter((h): h is string => !!h);
+
+  const providedHero =
+    typeof body.hero_image === "string" && body.hero_image.startsWith("https://")
+      ? body.hero_image
+      : null;
+  const heroImage =
+    providedHero && !recentHeroes.slice(0, 10).includes(providedHero)
+      ? providedHero
+      : pickHeroImage(category, recentHeroes);
 
   const { data, error } = await supabasePublic().rpc("ingest_blog_post", {
     p_secret: provided,
@@ -50,9 +74,9 @@ export async function POST(request: Request) {
     p_body_md: bodyMd,
     p_meta_description:
       typeof body.meta_description === "string" ? body.meta_description : null,
-    p_category: typeof body.category === "string" ? body.category : null,
+    p_category: category,
     p_tags: tags,
-    p_hero_image: typeof body.hero_image === "string" ? body.hero_image : null,
+    p_hero_image: heroImage,
     p_author: typeof body.author === "string" ? body.author : null,
   });
 

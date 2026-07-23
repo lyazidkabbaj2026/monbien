@@ -40,7 +40,7 @@ const BENEFITS = [
   {
     icon: Users,
     title: "Un conseiller qui cherche pour vous",
-    text: `${site.agent.name} connaît votre recherche et active son réseau : notaires, syndics, confrères. Vous ne cherchez plus seul.`,
+    text: `Votre conseiller ${site.brandName} connaît votre recherche et active son réseau : notaires, syndics, confrères. Vous ne cherchez plus seul.`,
   },
 ];
 

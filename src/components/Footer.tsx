@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "../../site.config";
 import { Logo } from "./Logo";
+import { WhatsAppIcon } from "./WhatsAppIcon";
 import { waLink, waMessages } from "@/lib/whatsapp";
 
 const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
@@ -15,12 +16,12 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
     ],
   },
   {
-    title: "Vendre",
+    title: "Services",
     links: [
       { href: "/vendre", label: "Vendre mon bien" },
       { href: "/estimer-mon-bien", label: "Estimation gratuite" },
-      { href: "/quartiers/rabat/agdal", label: "Immobilier Agdal" },
-      { href: "/quartiers/rabat/hay-riad", label: "Immobilier Hay Riad" },
+      { href: "/expatries", label: "Expatriés & MRE" },
+      { href: "/professionnels", label: "Professionnels & B2B" },
     ],
   },
   {
@@ -44,14 +45,16 @@ export function Footer() {
             {site.tagline}. Estimation gratuite, accompagnement de A à Z et
             réponse rapide sur WhatsApp.
           </p>
-          <div className="mt-5 flex items-center gap-3">
+          {/* Réseaux : trois tuiles égales, alignées sur la largeur du paragraphe */}
+          <div className="mt-5 grid max-w-xs grid-cols-3 gap-2.5">
             <a
               href={waLink(waMessages.generic)}
               target="_blank"
               rel="noopener"
-              className="btn-whatsapp !px-5 !py-2.5 text-[14px]"
+              aria-label={`${site.brandName} sur WhatsApp`}
+              className="flex h-12 items-center justify-center rounded-xl border border-white/15 bg-white/[0.04] text-white/75 transition hover:border-whatsapp hover:bg-whatsapp hover:text-white"
             >
-              Discuter sur WhatsApp
+              <WhatsAppIcon className="h-5 w-5" />
             </a>
             {site.instagram && (
               <a
@@ -59,7 +62,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener"
                 aria-label={`${site.brandName} sur Instagram`}
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 text-white/80 transition hover:border-white/50 hover:text-white"
+                className="flex h-12 items-center justify-center rounded-xl border border-white/15 bg-white/[0.04] text-white/75 transition hover:border-white/60 hover:bg-white/10 hover:text-white"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -83,7 +86,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener"
                 aria-label={`${site.brandName} sur TikTok`}
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 text-white/80 transition hover:border-white/50 hover:text-white"
+                className="flex h-12 items-center justify-center rounded-xl border border-white/15 bg-white/[0.04] text-white/75 transition hover:border-white/60 hover:bg-white/10 hover:text-white"
               >
                 <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5" aria-hidden>
                   <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />

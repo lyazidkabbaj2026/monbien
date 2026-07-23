@@ -30,6 +30,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/vendre"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/estimer-mon-bien"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/avant-premiere"), lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: absoluteUrl("/expatries"), lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/professionnels"), lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: absoluteUrl("/simulateur-credit"), lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/capacite-emprunt"), lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/prix-immobilier"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
