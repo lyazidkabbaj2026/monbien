@@ -7,7 +7,7 @@ export function siteUrl(): string {
   return (
     process.env.NEXT_PUBLIC_SITE_URL ||
     (site.domain && `https://${site.domain}`) ||
-    // Repli : domaine de production fourni par Vercel au build (ex. monbien.vercel.app)
+    // Repli : domaine de production fourni par Vercel au build (ex. homefinderma.vercel.app)
     (process.env.VERCEL_PROJECT_PRODUCTION_URL &&
       `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
     "http://localhost:3000"
