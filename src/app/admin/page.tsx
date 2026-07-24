@@ -136,8 +136,93 @@ export default async function AdminPage({
         ))}
       </div>
 
-      {/* Tableau */}
-      <div className="card mt-6 overflow-x-auto">
+      {/* Liste mobile (cartes) */}
+      <div className="mt-6 space-y-3 lg:hidden">
+        {leads.length === 0 && (
+          <p className="card p-8 text-center text-[14px] text-ink/50">
+            Aucun lead pour ces filtres.
+          </p>
+        )}
+        {leads.map((lead) => {
+          const valuation = valuationByLead.get(lead.id);
+          const phoneDigits = lead.phone.replace(/[^0-9]/g, "");
+          return (
+            <div key={lead.id} className="card p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="font-bold break-words text-ink">{lead.name}</p>
+                  <p className="text-[13px] text-ink/60">{lead.phone}</p>
+                  {lead.email && (
+                    <p className="text-[13px] break-all text-ink/50">{lead.email}</p>
+                  )}
+                </div>
+                <span className="shrink-0 rounded-full bg-primary/8 px-2.5 py-1 text-[12px] font-bold text-primary">
+                  {SOURCE_LABELS[lead.source]}
+                </span>
+              </div>
+              <p className="mt-1.5 text-[12px] text-ink/45">
+                {formatDateTime(lead.created_at)}
+                {lead.source_ref && ` · ${lead.source_ref}`}
+              </p>
+              {valuation ? (
+                <p className="mt-2 text-[13.5px] text-ink/70">
+                  {valuation.property_type} · {valuation.area_m2} m² ·{" "}
+                  {valuation.condition}
+                  <span className="block font-bold text-primary">
+                    {formatPrice(valuation.estimated_low)} —{" "}
+                    {formatPrice(valuation.estimated_high)}
+                  </span>
+                </p>
+              ) : lead.message ? (
+                <p className="mt-2 line-clamp-3 text-[13.5px] text-ink/70">
+                  {lead.message}
+                </p>
+              ) : Object.keys(lead.payload ?? {}).length > 0 ? (
+                <details className="mt-2">
+                  <summary className="cursor-pointer text-[12.5px] font-semibold text-primary">
+                    Voir le détail
+                  </summary>
+                  <pre className="mt-1 text-[11px] whitespace-pre-wrap text-ink/60">
+                    {JSON.stringify(lead.payload, null, 1)}
+                  </pre>
+                </details>
+              ) : null}
+              <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line/60 pt-3">
+                <LeadStatusSelect leadId={lead.id} initialStatus={lead.status} />
+                <a
+                  href={`https://wa.me/${phoneDigits}`}
+                  target="_blank"
+                  rel="noopener"
+                  className="py-1 text-[13.5px] font-bold text-whatsapp hover:underline"
+                >
+                  WhatsApp
+                </a>
+                <a
+                  href={`tel:${lead.phone}`}
+                  className="py-1 text-[13.5px] font-bold text-primary hover:underline"
+                >
+                  Appeler
+                </a>
+                {typeof lead.payload?.report_path === "string" && (
+                  <a
+                    href={`https://wa.me/${phoneDigits}?text=${encodeURIComponent(
+                      `Bonjour ${lead.name}, voici votre rapport complet du marché immobilier comme promis : ${absoluteUrl(lead.payload.report_path as string)} — je reste disponible pour le commenter ensemble !`
+                    )}`}
+                    target="_blank"
+                    rel="noopener"
+                    className="py-1 text-[13.5px] font-bold text-accent hover:underline"
+                  >
+                    Envoyer le rapport
+                  </a>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Tableau (desktop) */}
+      <div className="card mt-6 hidden overflow-x-auto lg:block">
         <table className="w-full min-w-[900px] text-[13.5px]">
           <thead className="bg-primary-soft text-left text-[12px] tracking-wide text-ink/55 uppercase">
             <tr>

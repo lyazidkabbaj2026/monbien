@@ -9,6 +9,7 @@ import { site } from "../../site.config";
 import { siteUrl, localBusinessJsonLd } from "@/lib/seo";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { PublicChrome } from "@/components/PublicChrome";
 import { WhatsAppSticky } from "@/components/WhatsAppSticky";
 import { ValuationNudge } from "@/components/ValuationNudge";
 import { JsonLd } from "@/components/JsonLd";
@@ -57,9 +58,13 @@ export default function RootLayout({
     >
       <body className="font-sans flex min-h-full flex-col">
         <JsonLd data={localBusinessJsonLd()} />
-        <Header />
+        <PublicChrome>
+          <Header />
+        </PublicChrome>
         <main className="flex-1">{children}</main>
-        <Footer />
+        <PublicChrome>
+          <Footer />
+        </PublicChrome>
         <WhatsAppSticky />
         <ValuationNudge />
         <Analytics />
